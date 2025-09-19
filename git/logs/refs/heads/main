@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 3672a89ed22b2d312506af6d4633f6445926940f crhack1312 <47726984-crhack1312@users.noreply.replit.com> 1758164700 +0000	commit (initial): Initial commit
+3672a89ed22b2d312506af6d4633f6445926940f 44bbd684f71c97f8668a28a984e4cf7c02bc082b crhack1312 <47726984-crhack1312@users.noreply.replit.com> 1758165853 +0000	commit: Add foundational UI components and structure for the application
+44bbd684f71c97f8668a28a984e4cf7c02bc082b 5c9b5452940b708a2992c18b148d2174d3b717c4 crhack1312 <47726984-crhack1312@users.noreply.replit.com> 1758165995 +0000	commit: Update styling to include new color themes and visual elements
+5c9b5452940b708a2992c18b148d2174d3b717c4 da988651a6cb7efcc4ab218dcbe4d2a9ce6a46bc crhack1312 <47726984-crhack1312@users.noreply.replit.com> 1758166363 +0000	commit: Add new AI functionality to detect plant diseases using image analysis
