@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroSmart AI - Smart Agriculture with AI-Powered Disease Detection</title>
+    <meta name="description" content="Revolutionizing crop health monitoring through advanced AI image analysis and comprehensive agricultural knowledge base. Detect plant diseases with 94% accuracy.">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="AgroSmart AI - Smart Agriculture with AI-Powered Disease Detection">
+    <meta property="og:description" content="Advanced AI-powered plant disease detection with comprehensive crop knowledge library.">
+    <meta property="og:type" content="website">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css">
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Video Background -->
+    <div id="video-background" class="video-background">
+        <div class="video-overlay"></div>
+        <button id="prev-video-btn" class="video-btn video-btn-left" data-testid="button-prev-video">
+            <i data-lucide="chevron-left"></i>
+        </button>
+        <button id="next-video-btn" class="video-btn video-btn-right" data-testid="button-next-video">
+            <i data-lucide="chevron-right"></i>
+        </button>
+        <div class="video-indicators">
+            <div class="indicator active" data-video="0" data-testid="indicator-video-0"></div>
+            <div class="indicator" data-video="1" data-testid="indicator-video-1"></div>
+            <div class="indicator" data-video="2" data-testid="indicator-video-2"></div>
+            <div class="indicator" data-video="3" data-testid="indicator-video-3"></div>
+            <div class="indicator" data-video="4" data-testid="indicator-video-4"></div>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <!-- Logo -->
+                <div class="logo" data-testid="link-home">
+                    <div class="logo-icon">
+                        <i data-lucide="sprout"></i>
+                    </div>
+                    <h1 class="logo-text">AgroSmart AI</h1>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="nav desktop-nav">
+                    <a href="#hero" class="nav-link" data-testid="link-home-nav">Home</a>
+                    <a href="#library" class="nav-link" data-testid="link-library">Plant Library</a>
+                    <a href="#ai-diagnosis" class="nav-link" data-testid="link-ai-diagnosis">AI Diagnosis</a>
+                    <a href="#about" class="nav-link" data-testid="link-about">About</a>
+                </nav>
+
+                <!-- Controls -->
+                <div class="header-controls">
+                    <div class="search-container desktop-search">
+                        <i data-lucide="search" class="search-icon"></i>
+                        <input type="text" id="search-input" placeholder="Search plants..." class="search-input" data-testid="input-search">
+                    </div>
+                    <button id="theme-toggle" class="theme-toggle" data-testid="button-dark-mode">
+                        <i data-lucide="moon" class="theme-icon"></i>
+                    </button>
+                    <button id="mobile-menu-toggle" class="mobile-menu-toggle" data-testid="button-mobile-menu">
+                        <i data-lucide="menu"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="mobile-menu">
+                <nav class="mobile-nav">
+                    <a href="#hero" class="nav-link" data-testid="link-home-mobile">Home</a>
+                    <a href="#library" class="nav-link" data-testid="link-library-mobile">Plant Library</a>
+                    <a href="#ai-diagnosis" class="nav-link" data-testid="link-ai-diagnosis-mobile">AI Diagnosis</a>
+                    <a href="#about" class="nav-link" data-testid="link-about-mobile">About</a>
+                </nav>
+                <div class="mobile-search">
+                    <input type="text" id="mobile-search-input" placeholder="Search plants..." class="search-input" data-testid="input-search-mobile">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="hero-title">
+                        Smart Agriculture with
+                        <span class="highlight">AI-Powered</span> Disease Detection
+                    </h2>
+                    <p class="hero-description">
+                        Revolutionizing crop health monitoring through advanced image analysis and comprehensive agricultural knowledge base
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary btn-lg" onclick="scrollToSection('ai-diagnosis')" data-testid="button-try-ai">
+                            <i data-lucide="brain"></i>
+                            Try AI Diagnosis
+                        </button>
+                        <button class="btn btn-secondary btn-lg" onclick="scrollToSection('library')" data-testid="button-browse-library">
+                            <i data-lucide="book"></i>
+                            Browse Library
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section id="stats" class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="stat-crops" data-testid="text-crops-supported">8+</div>
+                        <div class="stat-label">Crop Types Supported</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="stat-diseases" data-testid="text-diseases-detected">0+</div>
+                        <div class="stat-label">Diseases Detected</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="stat-accuracy" data-testid="text-accuracy">94%</div>
+                        <div class="stat-label">AI Accuracy</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="stat-farmers" data-testid="text-farmers-helped">10K+</div>
+                        <div class="stat-label">Farmers Helped</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Diagnosis Section -->
+        <section id="ai-diagnosis" class="ai-diagnosis">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i data-lucide="brain" class="section-icon"></i>
+                        AI-Powered Disease Detection
+                    </h2>
+                    <p class="section-description">
+                        Upload an image of your plant's leaves and get instant AI-powered analysis for disease identification and treatment recommendations
+                    </p>
+                </div>
+
+                <div class="ai-diagnosis-content">
+                    <div class="upload-section">
+                        <h3 class="upload-title">
+                            <i data-lucide="upload"></i>
+                            Upload Plant Image
+                        </h3>
+                        
+                        <div class="upload-zone" id="upload-zone" data-testid="zone-upload">
+                            <div class="upload-icon">
+                                <i data-lucide="cloud-upload"></i>
+                            </div>
+                            <p class="upload-text">Click to upload or drag and drop</p>
+                            <p class="upload-subtext">PNG, JPG up to 10MB</p>
+                            <input type="file" id="file-input" accept="image/*" class="file-input" data-testid="input-file">
+                        </div>
+
+                        <div id="file-controls" class="file-controls hidden">
+                            <button id="analyze-btn" class="btn btn-primary" data-testid="button-analyze">
+                                <i data-lucide="brain"></i>
+                                Analyze Image
+                            </button>
+                            <button id="reset-btn" class="btn btn-secondary" data-testid="button-reset">
+                                Reset
+                            </button>
+                        </div>
+
+                        <div class="upload-tips">
+                            <div class="tip">
+                                <i data-lucide="check" class="tip-icon"></i>
+                                <span>High-resolution images work best</span>
+                            </div>
+                            <div class="tip">
+                                <i data-lucide="check" class="tip-icon"></i>
+                                <span>Focus on affected leaves or plant parts</span>
+                            </div>
+                            <div class="tip">
+                                <i data-lucide="check" class="tip-icon"></i>
+                                <span>Natural lighting preferred</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results-section">
+                        <h3 class="results-title">
+                            <i data-lucide="brain"></i>
+                            Analysis Results
+                        </h3>
+                        
+                        <div id="results-placeholder" class="results-placeholder">
+                            <i data-lucide="brain" class="placeholder-icon"></i>
+                            <p>Upload an image to see AI analysis results</p>
+                        </div>
+
+                        <div id="results-loading" class="results-loading hidden">
+                            <i data-lucide="loader-2" class="loading-icon"></i>
+                            <p>Analyzing image with AI...</p>
+                        </div>
+
+                        <div id="results-content" class="results-content hidden">
+                            <div class="result-card">
+                                <h4>Disease Detected</h4>
+                                <p id="disease-name" class="disease-name" data-testid="text-disease"></p>
+                                <div class="confidence-bar">
+                                    <span>Confidence:</span>
+                                    <div class="progress-container">
+                                        <div id="confidence-progress" class="progress-bar"></div>
+                                    </div>
+                                    <span id="confidence-value" data-testid="text-confidence"></span>
+                                </div>
+                            </div>
+                            
+                            <div id="description-card" class="result-card hidden">
+                                <h4>Description</h4>
+                                <p id="disease-description" data-testid="text-description"></p>
+                            </div>
+                            
+                            <div class="result-card">
+                                <h4>Recommended Actions</h4>
+                                <ul id="recommendations-list"></ul>
+                            </div>
+
+                            <button class="btn btn-primary btn-full" data-testid="button-detailed-report">
+                                Get Detailed Report
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Plant Library Section -->
+        <section id="library" class="library">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i data-lucide="book" class="section-icon"></i>
+                        Plant Knowledge Library
+                    </h2>
+                    <p class="section-description">
+                        Comprehensive database of crop information, growth requirements, and care instructions
+                    </p>
+                </div>
+
+                <div class="library-controls">
+                    <div class="search-container">
+                        <i data-lucide="search" class="search-icon"></i>
+                        <input type="text" id="library-search" placeholder="Search plants by name, type, or disease..." class="search-input" data-testid="input-library-search">
+                    </div>
+                    
+                    <div class="filter-controls">
+                        <select id="category-filter" class="category-select" data-testid="select-category">
+                            <option value="all">All Categories</option>
+                        </select>
+                        
+                        <button id="grid-view-btn" class="view-btn active" data-testid="button-grid-view">
+                            <i data-lucide="grid"></i>
+                        </button>
+                        
+                        <button id="list-view-btn" class="view-btn" data-testid="button-list-view">
+                            <i data-lucide="list"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div id="plants-grid" class="plants-grid">
+                    <div class="loading-grid">
+                        <div class="plant-card-skeleton"></div>
+                        <div class="plant-card-skeleton"></div>
+                        <div class="plant-card-skeleton"></div>
+                        <div class="plant-card-skeleton"></div>
+                        <div class="plant-card-skeleton"></div>
+                        <div class="plant-card-skeleton"></div>
+                        <div class="plant-card-skeleton"></div>
+                        <div class="plant-card-skeleton"></div>
+                    </div>
+                </div>
+
+                <div id="load-more-container" class="load-more-container hidden">
+                    <button id="load-more-btn" class="btn btn-primary" data-testid="button-load-more">
+                        Load More Plants
+                    </button>
+                </div>
+
+                <div id="no-plants-message" class="no-results hidden">
+                    <i data-lucide="book" class="no-results-icon"></i>
+                    <p>No plants found matching your criteria</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2 class="section-title">About AgroSmart AI</h2>
+                    <p class="about-description">
+                        AgroSmart AI is a cutting-edge agricultural technology platform that combines artificial intelligence with comprehensive plant knowledge to revolutionize crop disease detection and agricultural practices.
+                    </p>
+                    
+                    <div class="features-grid">
+                        <div class="feature">
+                            <div class="feature-icon ai-icon">
+                                <i data-lucide="brain"></i>
+                            </div>
+                            <h3 class="feature-title">AI-Powered Analysis</h3>
+                            <p class="feature-description">
+                                Advanced machine learning algorithms provide accurate disease identification with 94% accuracy rate.
+                            </p>
+                        </div>
+                        
+                        <div class="feature">
+                            <div class="feature-icon library-icon">
+                                <i data-lucide="book"></i>
+                            </div>
+                            <h3 class="feature-title">Comprehensive Database</h3>
+                            <p class="feature-description">
+                                Extensive library covering 100+ crop types with detailed growth requirements and care instructions.
+                            </p>
+                        </div>
+                        
+                        <div class="feature">
+                            <div class="feature-icon farmer-icon">
+                                <i data-lucide="users"></i>
+                            </div>
+                            <h3 class="feature-title">Farmer-Focused</h3>
+                            <p class="feature-description">
+                                Designed specifically for farmers and agricultural students to improve productivity and reduce crop losses.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="logo">
+                        <div class="logo-icon">
+                            <i data-lucide="sprout"></i>
+                        </div>
+                        <h3 class="logo-text">AgroSmart AI</h3>
+                    </div>
+                    <p class="brand-description">
+                        Revolutionizing agriculture through AI-powered plant disease detection and comprehensive crop knowledge.
+                    </p>
+                    <div class="social-links">
+                        <button class="social-link" data-testid="link-facebook">
+                            <i data-lucide="facebook"></i>
+                        </button>
+                        <button class="social-link" data-testid="link-twitter">
+                            <i data-lucide="twitter"></i>
+                        </button>
+                        <button class="social-link" data-testid="link-linkedin">
+                            <i data-lucide="linkedin"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading">Features</h4>
+                    <ul class="footer-links">
+                        <li><a href="#ai-diagnosis" data-testid="link-ai-detection-footer">AI Disease Detection</a></li>
+                        <li><a href="#library" data-testid="link-plant-library-footer">Plant Library</a></li>
+                        <li><a href="#" data-testid="link-growth-analytics">Growth Analytics</a></li>
+                        <li><a href="#" data-testid="link-care-recommendations">Care Recommendations</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading">Resources</h4>
+                    <ul class="footer-links">
+                        <li><a href="#" data-testid="link-documentation">Documentation</a></li>
+                        <li><a href="#" data-testid="link-api-reference">API Reference</a></li>
+                        <li><a href="#" data-testid="link-research-papers">Research Papers</a></li>
+                        <li><a href="#" data-testid="link-case-studies">Case Studies</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4 class="footer-heading">Contact</h4>
+                    <ul class="contact-info">
+                        <li>
+                            <i data-lucide="mail"></i>
+                            <span data-testid="text-email">support@agrosmart.ai</span>
+                        </li>
+                        <li>
+                            <i data-lucide="phone"></i>
+                            <span data-testid="text-phone">+84 123 456 789</span>
+                        </li>
+                        <li>
+                            <i data-lucide="map-pin"></i>
+                            <span data-testid="text-address">Nghe An, Vietnam</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 AgroSmart AI. All rights reserved. | Built with ❤️ for sustainable agriculture</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Plant Detail Modal -->
+    <div id="plant-modal" class="modal" data-testid="modal-plant-details">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title-section">
+                    <div class="modal-icon">
+                        <i data-lucide="info"></i>
+                    </div>
+                    <div class="modal-title-text">
+                        <h2 id="modal-plant-name" data-testid="text-modal-plant-name"></h2>
+                        <p id="modal-plant-scientific"></p>
+                    </div>
+                </div>
+                <div class="modal-controls">
+                    <button class="modal-btn" data-testid="button-fullscreen">
+                        <i data-lucide="expand"></i>
+                    </button>
+                    <button id="close-modal" class="modal-btn" data-testid="button-close-modal">
+                        <i data-lucide="x"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-grid">
+                    <div class="modal-left">
+                        <img id="modal-plant-image" class="modal-plant-image" alt="">
+                        
+                        <div class="info-card">
+                            <h3>
+                                <i data-lucide="info"></i>
+                                Plant Information
+                            </h3>
+                            <div class="info-items">
+                                <div class="info-item">
+                                    <span>Scientific Name:</span>
+                                    <span id="modal-scientific-name"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span>Family:</span>
+                                    <span id="modal-family"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span>Origin:</span>
+                                    <span id="modal-origin"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span>Growth Period:</span>
+                                    <span id="modal-growth-period"></span>
+                                </div>
+                                <div class="info-item">
+                                    <span>Category:</span>
+                                    <span id="modal-category" class="category-badge"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="nutrition-card">
+                            <h3>
+                                <i data-lucide="apple"></i>
+                                Nutritional Benefits
+                            </h3>
+                            <p id="modal-nutrition"></p>
+                        </div>
+                    </div>
+
+                    <div class="modal-right">
+                        <div class="chart-card">
+                            <h3>
+                                <i data-lucide="brain"></i>
+                                Growth Requirements
+                            </h3>
+                            <div class="chart-container">
+                                <canvas id="modal-chart" data-testid="chart-growth-requirements"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="care-card">
+                            <h3>
+                                <i data-lucide="check-circle"></i>
+                                Care Instructions
+                            </h3>
+                            <p id="modal-care"></p>
+                        </div>
+
+                        <div class="diseases-card">
+                            <h3>
+                                <i data-lucide="bug"></i>
+                                Common Diseases
+                            </h3>
+                            <div id="modal-diseases" class="diseases-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn btn-primary btn-flex" onclick="scrollToSection('ai-diagnosis'); closeModal();" data-testid="button-diagnose-ai">
+                        <i data-lucide="brain"></i>
+                        Diagnose with AI
+                    </button>
+                    <button class="btn btn-secondary btn-flex" data-testid="button-download-guide">
+                        <i data-lucide="download"></i>
+                        Download Care Guide
+                    </button>
+                    <button class="btn btn-outline btn-flex" data-testid="button-share-plant">
+                        <i data-lucide="share"></i>
+                        Share
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
